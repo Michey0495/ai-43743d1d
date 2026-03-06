@@ -44,6 +44,6 @@
 - [x] ヘッダー・フッターナビゲーション
 
 ### 未実装・改善余地
-- [ ] OGP画像生成（シーン別）
+- [x] OGP画像生成（シーン別・ガイド別）
 - [ ] Vercelデプロイ・ドメイン設定
 - [ ] 環境変数設定（ANTHROPIC_API_KEY, NEXT_PUBLIC_GA_ID, GITHUB_TOKEN）
