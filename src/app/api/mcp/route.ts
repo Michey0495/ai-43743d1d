@@ -49,7 +49,15 @@ const TOOLS = [
 ];
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { jsonrpc: "2.0", id: null, error: { code: -32700, message: "Parse error" } },
+      { status: 400 }
+    );
+  }
 
   if (body.method === "tools/list") {
     return NextResponse.json({

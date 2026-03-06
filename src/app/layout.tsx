@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | eigo-ai",
   },
   description:
-    "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。15+のビジネスシーンに対応。無料で使えます。",
+    "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。10種類のビジネスシーンに対応。無料で使えます。",
   keywords: [
     "英語メール",
     "ビジネス英語",
@@ -71,7 +71,7 @@ export default function RootLayout({
               name: "eigo-ai",
               url: "https://eigo.ezoai.jp",
               description:
-                "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。15+のビジネスシーンに対応。",
+                "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。10種類のビジネスシーンに対応。",
               applicationCategory: "BusinessApplication",
               operatingSystem: "Web",
               offers: {

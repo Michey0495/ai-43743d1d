@@ -24,7 +24,7 @@ export function EmailResult({ subject, body, explanation }: EmailResultProps) {
             <span className="text-white text-base">{subject}</span>
           </div>
           <div className="border-t border-white/10 pt-3">
-            <pre className="text-white text-base leading-relaxed whitespace-pre-wrap font-[inherit]">
+            <pre lang="en" className="text-white text-base leading-relaxed whitespace-pre-wrap font-[inherit]">
               {body}
             </pre>
           </div>

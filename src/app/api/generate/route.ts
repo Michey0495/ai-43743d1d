@@ -24,12 +24,27 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { error: "リクエストの形式が不正です" },
+      { status: 400 }
+    );
+  }
   const { scene, tone, relationship, recipientName, senderName, points } = body;
 
   if (!scene || !tone || !relationship || !points) {
     return NextResponse.json(
       { error: "必須パラメータが不足しています" },
+      { status: 400 }
+    );
+  }
+
+  if (typeof points !== "string" || points.length > 2000) {
+    return NextResponse.json(
+      { error: "入力テキストが長すぎます（2000文字以内）" },
       { status: 400 }
     );
   }

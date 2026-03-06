@@ -137,6 +137,7 @@ export function GenerateForm() {
                 value={recipientName}
                 onChange={(e) => setRecipientName(e.target.value)}
                 placeholder="例: John"
+                maxLength={100}
                 className="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 text-white text-base placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -147,6 +148,7 @@ export function GenerateForm() {
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
                 placeholder="例: Tanaka"
+                maxLength={100}
                 className="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 text-white text-base placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -165,6 +167,7 @@ export function GenerateForm() {
               "日本語で伝えたいことを入力してください"
             }
             rows={5}
+            maxLength={2000}
             className="bg-white/5 border-white/10 text-white text-base leading-relaxed placeholder:text-white/30 resize-none"
           />
         </div>

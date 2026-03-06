@@ -7,7 +7,7 @@ export function Header() {
         <Link href="/" className="text-xl font-bold text-white cursor-pointer transition-all duration-200 hover:text-blue-400">
           eigo-ai
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav aria-label="メインナビゲーション" className="flex items-center gap-6">
           <Link
             href="/generate"
             className="text-white/70 hover:text-white cursor-pointer transition-all duration-200 text-base"

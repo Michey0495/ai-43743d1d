@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const { type, message, repo } = await request.json();
+  let payload;
+  try {
+    payload = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+  const { type, message, repo } = payload;
 
   if (!message?.trim()) {
     return NextResponse.json({ error: "Message required" }, { status: 400 });
@@ -14,7 +20,7 @@ export async function POST(request: NextRequest) {
   };
 
   const title = `[${type}] ${message.slice(0, 80)}${message.length > 80 ? "..." : ""}`;
-  const body = `## User Feedback\n\n**Type:** ${type}\n\n**Message:**\n${message}\n\n---\n*Auto-created from in-app feedback widget*`;
+  const issueBody = `## User Feedback\n\n**Type:** ${type}\n\n**Message:**\n${message}\n\n---\n*Auto-created from in-app feedback widget*`;
 
   const token = process.env.GITHUB_TOKEN;
 
@@ -28,7 +34,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           title,
-          body,
+          body: issueBody,
           labels: [labels[type] || "feedback"],
         }),
       });
