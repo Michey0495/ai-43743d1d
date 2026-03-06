@@ -262,6 +262,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="mb-20">
+        <h2 className="text-2xl font-bold text-white mb-8 text-center">
+          よくある質問
+        </h2>
+        <div className="space-y-4">
+          {[
+            {
+              q: "eigo-aiは無料で使えますか?",
+              a: "はい、登録不要で1日3回まで無料でご利用いただけます。メールアドレスやクレジットカードの登録は一切不要です。",
+            },
+            {
+              q: "どんなビジネスシーンに対応していますか?",
+              a: "自己紹介、依頼、お詫び、催促、お礼、断り、報告、問い合わせ、アポイント、退職挨拶の10種類のビジネスシーンに対応しています。",
+            },
+            {
+              q: "ChatGPTやDeepLとの違いは何ですか?",
+              a: "eigo-aiはビジネスメール生成に特化しており、毎回のプロンプト設計が不要です。シーン選択と日本語入力だけで最適な英語メールを生成し、表現解説付きで英語力も向上します。",
+            },
+            {
+              q: "生成されたメールの品質は信頼できますか?",
+              a: "最新のAI技術（Claude）を活用し、ビジネスメールのフォーマットや英語表現の正確性を重視して生成しています。トーンや関係性に応じた適切な表現を自動選択します。",
+            },
+          ].map((item) => (
+            <details
+              key={item.q}
+              className="bg-white/5 border border-white/10 rounded-lg group"
+            >
+              <summary className="text-white font-medium text-base p-5 cursor-pointer transition-all duration-200 hover:bg-white/5 list-none flex items-center justify-between">
+                {item.q}
+                <span className="text-white/30 ml-4 shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+              </summary>
+              <p className="text-white/70 text-base leading-relaxed px-5 pb-5">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="text-center">
         <div className="bg-white/5 border border-white/10 rounded-lg p-12">

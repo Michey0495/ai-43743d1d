@@ -2,7 +2,7 @@
 
 日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成するWebアプリ。
 
-**URL:** https://eigo.ezoai.jp
+**URL:** https://ai-43743d1d.ezoai.jp
 
 ## 機能
 
