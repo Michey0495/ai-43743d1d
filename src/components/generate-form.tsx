@@ -20,6 +20,7 @@ interface GenerateResult {
   subject: string;
   body: string;
   explanation: string;
+  remaining?: number;
 }
 
 export function GenerateForm() {
@@ -188,11 +189,18 @@ export function GenerateForm() {
       )}
 
       {result && (
-        <EmailResult
-          subject={result.subject}
-          body={result.body}
-          explanation={result.explanation}
-        />
+        <>
+          {result.remaining !== undefined && (
+            <div className="text-white/50 text-sm text-center">
+              本日の残り生成回数: {result.remaining}回
+            </div>
+          )}
+          <EmailResult
+            subject={result.subject}
+            body={result.body}
+            explanation={result.explanation}
+          />
+        </>
       )}
     </div>
   );

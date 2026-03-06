@@ -20,6 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: scene.seoTitle,
       description: scene.seoDescription,
     },
+    alternates: {
+      canonical: `https://ai-43743d1d.ezoai.jp/scenes/${scene.slug}`,
+    },
   };
 }
 
@@ -32,8 +35,48 @@ export default async function ScenePage({ params }: Props) {
   const scene = getSceneBySlug(slug);
   if (!scene) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: scene.seoTitle,
+    description: scene.seoDescription,
+    url: `https://ai-43743d1d.ezoai.jp/scenes/${scene.slug}`,
+    isPartOf: {
+      "@type": "WebApplication",
+      name: "eigo-ai",
+      url: "https://ai-43743d1d.ezoai.jp",
+    },
+    mainEntity: {
+      "@type": "HowTo",
+      name: `英語${scene.name}メールの作成方法`,
+      description: scene.seoDescription,
+      step: [
+        {
+          "@type": "HowToStep",
+          name: "シーンを選択",
+          text: `「${scene.name}」シーンを選択します。`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "日本語で要点を入力",
+          text: "伝えたい内容の要点を日本語で入力し、トーンと関係性を設定します。",
+        },
+        {
+          "@type": "HowToStep",
+          name: "英語メールを取得",
+          text: "AIが件名付きの英語メールを自動生成します。表現解説も付属します。",
+        },
+      ],
+    },
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <h1 className="text-3xl font-bold text-white mb-4">
         英語{scene.name}メール - AI自動生成
       </h1>
@@ -58,6 +101,32 @@ export default async function ScenePage({ params }: Props) {
             {scene.name}メールを生成する
           </Button>
         </Link>
+      </div>
+
+      <div className="bg-white/5 border border-white/10 rounded-lg p-8 mb-8">
+        <h2 className="text-white font-bold text-xl mb-4">
+          {scene.name}メールのポイント
+        </h2>
+        <ul className="space-y-3">
+          {scene.tips.map((tip) => (
+            <li key={tip} className="text-white/70 text-base leading-relaxed flex items-start gap-3">
+              <span className="text-blue-400 mt-1 shrink-0">--</span>
+              {tip}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="bg-white/5 border border-white/10 rounded-lg p-8 mb-8">
+        <h2 className="text-white font-bold text-xl mb-4">よく使うフレーズ</h2>
+        <div className="space-y-4">
+          {scene.examplePhrases.map((phrase) => (
+            <div key={phrase.en} className="border-l-2 border-blue-500/30 pl-4">
+              <p className="text-white text-base" lang="en">{phrase.en}</p>
+              <p className="text-white/50 text-sm mt-1">{phrase.ja}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="bg-white/5 border border-white/10 rounded-lg p-8 mb-8">

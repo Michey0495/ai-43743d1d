@@ -20,6 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: guide.seoTitle,
       description: guide.seoDescription,
     },
+    alternates: {
+      canonical: `https://ai-43743d1d.ezoai.jp/guide/${guide.slug}`,
+    },
   };
 }
 
@@ -32,8 +35,32 @@ export default async function GuidePage({ params }: Props) {
   const guide = getGuideBySlug(topic);
   if (!guide) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.seoTitle,
+    description: guide.seoDescription,
+    url: `https://ai-43743d1d.ezoai.jp/guide/${guide.slug}`,
+    publisher: {
+      "@type": "Organization",
+      name: "eigo-ai",
+      url: "https://ai-43743d1d.ezoai.jp",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://ai-43743d1d.ezoai.jp/guide/${guide.slug}`,
+    },
+    articleSection: "ビジネス英語ガイド",
+    inLanguage: "ja",
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <h1 className="text-3xl font-bold text-white mb-4">{guide.title}</h1>
       <p className="text-white/70 text-lg mb-8 leading-relaxed">
         {guide.seoDescription}
