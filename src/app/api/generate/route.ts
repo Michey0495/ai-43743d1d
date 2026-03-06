@@ -49,6 +49,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  if ((recipientName && (typeof recipientName !== "string" || recipientName.length > 100)) ||
+      (senderName && (typeof senderName !== "string" || senderName.length > 100))) {
+    return NextResponse.json(
+      { error: "名前は100文字以内で入力してください" },
+      { status: 400 }
+    );
+  }
+
   const validScene = scenes.find((s) => s.id === scene);
   if (!validScene) {
     return NextResponse.json({ error: "無効なシーンです" }, { status: 400 });

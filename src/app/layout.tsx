@@ -48,21 +48,12 @@ export const metadata: Metadata = {
     title: "eigo-ai | 日本語入力だけで英語ビジネスメールを自動生成",
     description:
       "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。10種類のビジネスシーン対応。登録不要・無料。",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "eigo-ai - 日本語から英語ビジネスメールをAI自動生成",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "eigo-ai | 日本語入力だけで英語ビジネスメールを自動生成",
     description:
       "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。登録不要・無料。",
-    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "https://ai-43743d1d.ezoai.jp",
@@ -110,12 +101,6 @@ export default function RootLayout({
                   priceCurrency: "JPY",
                 },
                 inLanguage: ["ja", "en"],
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: "4.8",
-                  ratingCount: "127",
-                  bestRating: "5",
-                },
                 featureList: [
                   "10種類のビジネスシーン対応",
                   "トーン・関係性の自動調整",

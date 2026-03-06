@@ -97,6 +97,33 @@
 - [x] Accessibility (semantic HTML, aria labels, form labels, focus states)
 - [x] No unused dependencies or assets
 
+## Issues Found & Fixed (3rd Pass)
+
+### 13. OG画像URLの不一致
+- **Severity:** High (SEO)
+- **Status:** Fixed
+- `layout.tsx` のメタデータで `/og-image.png` を手動指定していたが、該当ファイルが `public/` に存在しない
+- 実際のOG画像は `opengraph-image.tsx` で動的生成。Next.jsのファイルベースメタデータに統一
+
+### 14. 構造化データの虚偽レーティング
+- **Severity:** High (SEO penalty risk)
+- **Status:** Fixed
+- JSON-LD に `AggregateRating`（4.8点/127件）が含まれていたが、実際のレビューに基づかない
+- Google構造化データガイドライン違反。`aggregateRating` セクションを削除
+
+### 15. サーバーサイドバリデーション不足
+- **Severity:** Medium
+- **Status:** Fixed
+- `recipientName`/`senderName` のサーバーサイド長さバリデーションが欠如
+- APIを直接叩いた場合に非常に長い名前を送信可能だった
+- `route.ts` に型チェック・100文字制限を追加
+
+### 16. フィードバックウィジェットのアクセシビリティ
+- **Severity:** Low
+- **Status:** Fixed
+- 閉じるボタン（&times;）に `aria-label` がなく、スクリーンリーダーで用途不明
+- `aria-label="閉じる"` を追加
+
 ## Not Addressed (Out of Scope / Pre-existing)
 
 - **Vercel deployment** - Listed as TODO in README.
@@ -105,4 +132,4 @@
 
 ## Summary
 
-Found and fixed 12 issues total across 2 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.
+Found and fixed 16 issues total across 3 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.
