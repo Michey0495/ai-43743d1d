@@ -55,6 +55,11 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <div className="mt-8 text-center">
+          <p className="text-white/40 text-sm">
+            ChatGPTのプロンプト設計不要 / DeepLのフォーマット調整不要 / ビジネスメール専用AI
+          </p>
+        </div>
       </section>
 
       {/* Before/After Demo */}
@@ -83,6 +88,41 @@ export default function Home() {
         <p className="text-center text-white/40 text-sm mt-4">
           所要時間: 10秒 / 表現解説付き
         </p>
+      </section>
+
+      {/* Expression Explanation Highlight */}
+      <section className="mb-20">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-6">
+          <h2 className="text-lg font-bold text-white mb-4">
+            表現解説で英語力が上がる
+          </h2>
+          <div className="space-y-3 text-base">
+            <div className="flex gap-3">
+              <span className="text-blue-400 shrink-0">&bull;</span>
+              <p className="text-white/70">
+                <span className="text-white font-medium">&quot;I hope this email finds you well&quot;</span>
+                {" "}= フォーマルなビジネスメールの定番挨拶。初回メールで使う
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-blue-400 shrink-0">&bull;</span>
+              <p className="text-white/70">
+                <span className="text-white font-medium">&quot;at your earliest convenience&quot;</span>
+                {" "}= ASAPより丁寧な「お手すきの際に」の表現
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-blue-400 shrink-0">&bull;</span>
+              <p className="text-white/70">
+                <span className="text-white font-medium">&quot;I wanted to follow up on...&quot;</span>
+                {" "}= 催促メールの定番。押しつけがましくない丁寧な催促表現
+              </p>
+            </div>
+          </div>
+          <p className="text-white/40 text-sm mt-4">
+            生成されたメールすべてにこのような解説が付きます
+          </p>
+        </div>
       </section>
 
       {/* Features */}
