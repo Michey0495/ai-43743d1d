@@ -39,18 +39,29 @@ export default async function GuidePage({ params }: Props) {
         {guide.seoDescription}
       </p>
 
-      <div className="bg-white/5 border border-white/10 rounded-lg p-8 mb-8">
-        <p className="text-white/70 text-base leading-relaxed">
-          このガイドは準備中です。eigo-ai のメール生成機能を使えば、
-          適切な書き出し・締め・件名・フレーズが自動で含まれた英語メールを生成できます。
-        </p>
-        <div className="mt-6">
-          <Link href="/generate">
-            <Button className="bg-blue-500 hover:bg-blue-600 text-white text-base px-6 py-4 cursor-pointer transition-all duration-200">
-              英語メールを生成する
-            </Button>
-          </Link>
+      {guide.sections.map((section) => (
+        <div
+          key={section.heading}
+          className="bg-white/5 border border-white/10 rounded-lg p-8 mb-6"
+        >
+          <h2 className="text-white font-bold text-xl mb-4">
+            {section.heading}
+          </h2>
+          <div className="text-white/70 text-base leading-loose whitespace-pre-wrap">
+            {section.content}
+          </div>
         </div>
+      ))}
+
+      <div className="bg-white/5 border border-white/10 rounded-lg p-8 mb-8 text-center">
+        <p className="text-white/70 text-base mb-4">
+          eigo-ai なら、これらの表現を自動で最適に組み合わせた英語メールを生成できます。
+        </p>
+        <Link href="/generate">
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white text-base px-6 py-4 cursor-pointer transition-all duration-200">
+            英語メールを生成する
+          </Button>
+        </Link>
       </div>
 
       <div className="mt-12">
