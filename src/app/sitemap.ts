@@ -3,7 +3,7 @@ import { scenes } from "@/lib/scenes";
 import { guides } from "@/lib/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://eigo.ezoai.jp";
+  const baseUrl = "https://ai-43743d1d.ezoai.jp";
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },

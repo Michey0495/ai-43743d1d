@@ -1,5 +1,5 @@
 # eigo-ai - AI & Search Engine Crawlers Welcome
-# https://eigo.ezoai.jp
+# https://ai-43743d1d.ezoai.jp
 
 User-agent: *
 Allow: /
@@ -29,4 +29,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://eigo.ezoai.jp/sitemap.xml
+Sitemap: https://ai-43743d1d.ezoai.jp/sitemap.xml

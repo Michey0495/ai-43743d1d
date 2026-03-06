@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eigo.ezoai.jp"),
+  metadataBase: new URL("https://ai-43743d1d.ezoai.jp"),
   title: {
     default: "eigo-ai | 日本語から英語ビジネスメールをAI自動生成 - 無料・登録不要",
     template: "%s | eigo-ai",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    url: "https://eigo.ezoai.jp",
+    url: "https://ai-43743d1d.ezoai.jp",
     siteName: "eigo-ai",
     title: "eigo-ai | 日本語入力だけで英語ビジネスメールを自動生成",
     description:
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://eigo.ezoai.jp",
+    canonical: "https://ai-43743d1d.ezoai.jp",
   },
   robots: {
     index: true,
@@ -99,7 +99,7 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 name: "eigo-ai",
-                url: "https://eigo.ezoai.jp",
+                url: "https://ai-43743d1d.ezoai.jp",
                 description:
                   "日本語で要点を入力するだけで、AIが完璧な英語ビジネスメールを自動生成。10種類のビジネスシーンに対応。",
                 applicationCategory: "BusinessApplication",
@@ -122,6 +122,31 @@ export default function RootLayout({
                   "日本語の表現解説付き",
                   "件名の自動生成",
                   "登録不要",
+                ],
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                name: "日本語から英語ビジネスメールを自動生成する方法",
+                description:
+                  "eigo-aiを使って、日本語の要点入力から10秒で英語ビジネスメールを生成する手順",
+                totalTime: "PT10S",
+                step: [
+                  {
+                    "@type": "HowToStep",
+                    name: "ビジネスシーンを選択",
+                    text: "自己紹介、依頼、お詫び、催促、お礼、断り、報告、問い合わせ、アポイント、退職挨拶の10種類から選択します。",
+                  },
+                  {
+                    "@type": "HowToStep",
+                    name: "日本語で要点を入力",
+                    text: "伝えたい内容の要点を日本語で入力します。トーン（フォーマル/スタンダード/カジュアル）と相手との関係性も設定できます。",
+                  },
+                  {
+                    "@type": "HowToStep",
+                    name: "英語メールを取得",
+                    text: "AIが件名付きの英語ビジネスメールを自動生成します。日本語の表現解説も付属するので、英語力の向上にもつながります。",
+                  },
                 ],
               },
               {
