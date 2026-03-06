@@ -124,12 +124,35 @@
 - 閉じるボタン（&times;）に `aria-label` がなく、スクリーンリーダーで用途不明
 - `aria-label="閉じる"` を追加
 
+## Issues Found & Fixed (4th Pass)
+
+### 17. JSON.parseのエラーハンドリング不足
+- **Severity:** Medium
+- **Status:** Fixed
+- `src/app/api/generate/route.ts` でAI応答のJSON解析時に `JSON.parse` がtry/catchなしで呼ばれていた
+- AI応答が不正なJSONの場合、未ハンドルの例外でサーバーエラーになる
+- try/catchを追加し、ユーザー向けエラーメッセージを返すように修正
+
+### 18. コピーボタンのエラーハンドリング不足
+- **Severity:** Low
+- **Status:** Fixed
+- `src/components/copy-button.tsx` で `navigator.clipboard.writeText` がtry/catchなし
+- HTTPS以外のコンテキストやパーミッション拒否時にエラー
+- try/catchを追加
+
+### 19. フォームinput要素のアクセシビリティ不備
+- **Severity:** Low
+- **Status:** Fixed
+- `src/components/generate-form.tsx` の名前入力フィールドに `id`/`htmlFor` 属性がなく、ラベルとinputが関連付けされていなかった
+- `id="recipientName"`, `id="senderName"` と対応する `htmlFor` を追加
+
 ## Not Addressed (Out of Scope / Pre-existing)
 
 - **Vercel deployment** - Listed as TODO in README.
 - **Environment variables** - ANTHROPIC_API_KEY, GA_ID, GITHUB_TOKEN need to be set on deployment.
 - **Google Site Verification** - Uses environment variable; must be set in Vercel.
+- **Rate limiting in-memory** - Vercelサーバーレス環境では再起動時にリセットされる（無料枠のため影響小）
 
 ## Summary
 
-Found and fixed 16 issues total across 3 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.
+Found and fixed 19 issues total across 4 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.

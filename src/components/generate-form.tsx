@@ -132,8 +132,9 @@ export function GenerateForm() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="text-white text-base">相手の名前</Label>
+              <Label htmlFor="recipientName" className="text-white text-base">相手の名前</Label>
               <input
+                id="recipientName"
                 type="text"
                 value={recipientName}
                 onChange={(e) => setRecipientName(e.target.value)}
@@ -143,8 +144,9 @@ export function GenerateForm() {
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-white text-base">自分の名前</Label>
+              <Label htmlFor="senderName" className="text-white text-base">自分の名前</Label>
               <input
+                id="senderName"
                 type="text"
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}

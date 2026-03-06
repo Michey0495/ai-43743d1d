@@ -112,7 +112,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = JSON.parse(jsonMatch[0]);
+    let result;
+    try {
+      result = JSON.parse(jsonMatch[0]);
+    } catch {
+      return NextResponse.json(
+        { error: "生成結果の解析に失敗しました" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {
