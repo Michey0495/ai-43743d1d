@@ -57,6 +57,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Before/After Demo */}
+      <section className="mb-20">
+        <h2 className="text-2xl font-bold text-white mb-8 text-center">
+          こんなに変わる
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white/5 border border-white/10 rounded-lg p-6">
+            <div className="text-white/40 text-sm font-medium mb-3">BEFORE: あなたの入力</div>
+            <p className="text-white/70 text-base leading-relaxed">
+              「納品が2日遅れた。原因は部署間の確認プロセスが遅れたため。再発防止策として承認フローを短縮する予定」
+            </p>
+          </div>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-6">
+            <div className="text-blue-400 text-sm font-medium mb-3">AFTER: AI生成メール</div>
+            <p className="text-white/90 text-sm leading-relaxed font-mono">
+              Subject: Sincere Apologies for the Delivery Delay<br /><br />
+              Dear Mr. Johnson,<br /><br />
+              I sincerely apologize for the two-day delay in our delivery. This was caused by an unforeseen delay in our internal review process between departments.<br /><br />
+              To prevent this from recurring, we are streamlining our approval workflow to ensure faster turnaround...<br /><br />
+              Best regards
+            </p>
+          </div>
+        </div>
+        <p className="text-center text-white/40 text-sm mt-4">
+          所要時間: 10秒 / 表現解説付き
+        </p>
+      </section>
+
       {/* Features */}
       <section className="mb-20">
         <h2 className="text-2xl font-bold text-white mb-8 text-center">
@@ -207,6 +235,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Time Savings */}
+      <section className="mb-20">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-bold text-white mb-6">
+            あなたの時間を取り戻す
+          </h2>
+          <div className="flex flex-wrap justify-center gap-12">
+            <div>
+              <div className="text-white/40 text-sm mb-1">従来の方法</div>
+              <div className="text-white/60 text-2xl font-bold">30分</div>
+              <div className="text-white/40 text-xs">/ 1通あたり</div>
+            </div>
+            <div className="flex items-center">
+              <div className="text-white/30 text-2xl">&rarr;</div>
+            </div>
+            <div>
+              <div className="text-blue-400 text-sm mb-1">eigo-ai</div>
+              <div className="text-blue-400 text-2xl font-bold">10秒</div>
+              <div className="text-blue-400/60 text-xs">/ 1通あたり</div>
+            </div>
+          </div>
+          <p className="text-white/50 text-sm mt-6">
+            1日3通なら月29.5時間の節約。年間354時間を本来の仕事に。
+          </p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="text-center">
         <div className="bg-white/5 border border-white/10 rounded-lg p-12">
@@ -221,6 +276,9 @@ export default function Home() {
               無料で英語メールを生成する
             </Button>
           </Link>
+          <p className="text-white/30 text-xs mt-4">
+            メールアドレス不要 / クレジットカード不要 / 1日3回まで無料
+          </p>
         </div>
       </section>
     </div>
