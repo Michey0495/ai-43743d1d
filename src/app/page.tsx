@@ -138,6 +138,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Mid-page CTA */}
+      <section className="mb-20 text-center">
+        <Link href="/generate">
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white text-base px-6 py-4 cursor-pointer transition-all duration-200">
+            10秒で英語メールを作る
+          </Button>
+        </Link>
+      </section>
+
       {/* Advantages */}
       <section className="mb-20">
         <h2 className="text-2xl font-bold text-white mb-8 text-center">
@@ -259,6 +268,25 @@ export default function Home() {
           <p className="text-white/50 text-sm mt-6">
             1日3通なら月29.5時間の節約。年間354時間を本来の仕事に。
           </p>
+        </div>
+      </section>
+
+      {/* Trust Badges */}
+      <section className="mb-20">
+        <div className="flex flex-wrap justify-center gap-6 text-center">
+          {[
+            "SSL暗号化通信",
+            "入力データ非保存",
+            "アカウント不要",
+            "広告なし",
+          ].map((badge) => (
+            <div
+              key={badge}
+              className="bg-white/5 border border-white/10 rounded-full px-5 py-2 text-white/50 text-sm"
+            >
+              {badge}
+            </div>
+          ))}
         </div>
       </section>
 

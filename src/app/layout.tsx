@@ -39,6 +39,14 @@ export const metadata: Metadata = {
     "英文メール 書き出し",
     "英語メール 締め",
     "AI メール作成",
+    "英語メール 件名",
+    "英語メール 返信",
+    "英語メール 挨拶",
+    "英文メール 結び",
+    "英語 ビジネスメール 書き方",
+    "English email generator",
+    "business email AI",
+    "Japanese to English email",
   ],
   openGraph: {
     type: "website",
@@ -57,6 +65,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://ai-43743d1d.ezoai.jp",
+    languages: {
+      "ja": "https://ai-43743d1d.ezoai.jp",
+      "x-default": "https://ai-43743d1d.ezoai.jp",
+    },
   },
   robots: {
     index: true,
@@ -108,6 +120,11 @@ export default function RootLayout({
                   "件名の自動生成",
                   "登録不要",
                 ],
+                author: {
+                  "@type": "Organization",
+                  name: "ezoai.jp",
+                  url: "https://ezoai.jp",
+                },
               },
               {
                 "@context": "https://schema.org",
