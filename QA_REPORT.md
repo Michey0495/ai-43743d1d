@@ -2,6 +2,7 @@
 
 **Date:** 2026-03-07
 **Tester:** Claude (automated QA)
+**QA Pass:** 2nd pass (follow-up)
 
 ## Build & Lint
 
@@ -11,7 +12,7 @@
 | `npm run lint` | PASS (0 errors) |
 | TypeScript | PASS (strict mode) |
 
-## Issues Found & Fixed
+## Issues Found & Fixed (1st Pass)
 
 ### 1. Missing 404 page (not-found.tsx)
 - **Severity:** Medium
@@ -36,7 +37,7 @@
 ### 5. Incorrect scene count in metadata
 - **Severity:** Low
 - **Status:** Fixed
-- `layout.tsx` metadata/JSON-LD said "15+" scenes but only 10 exist. Changed to "10種類"
+- `layout.tsx` metadata/JSON-LD said "15+" scenes but only 10 exist. Changed to "10"
 
 ### 6. Incorrect Next.js version in llms.txt
 - **Severity:** Low
@@ -46,28 +47,37 @@
 ### 7. API routes vulnerable to malformed JSON
 - **Severity:** High
 - **Status:** Fixed
-- Added try/catch around `request.json()` in all 3 API routes:
-  - `/api/generate` - returns 400 with Japanese error message
-  - `/api/mcp` - returns JSON-RPC parse error (-32700)
-  - `/api/feedback` - returns 400
+- Added try/catch around `request.json()` in all 3 API routes
 
 ### 8. No input length validation
 - **Severity:** Medium
 - **Status:** Fixed
-- Added `maxLength={2000}` to textarea in generate form
-- Added `maxLength={100}` to name input fields
-- Added server-side validation in `/api/generate` (rejects points > 2000 chars)
+- Added maxLength to textarea and input fields (client + server)
 
 ### 9. Accessibility improvements
 - **Severity:** Low
 - **Status:** Fixed
 - Added `aria-label` to header navigation
-- Added `lang="en"` to email result `<pre>` element for screen reader language switching
+- Added `lang="en"` to email result `<pre>` element
 
 ### 10. Variable naming conflict in feedback route
 - **Severity:** High (build-breaking)
 - **Status:** Fixed
-- Renamed `body` variable to `payload`/`issueBody` to avoid conflict with outer `let body`
+- Renamed `body` variable to avoid conflict
+
+## Issues Found & Fixed (2nd Pass)
+
+### 11. Design system violation: lucide-react usage
+- **Severity:** Medium
+- **Status:** Fixed
+- `src/components/ui/select.tsx` imported `CheckIcon`, `ChevronDownIcon`, `ChevronUpIcon` from lucide-react
+- CLAUDE.md prohibits icon libraries: Replaced with inline SVG components
+- Removed `lucide-react` from package.json dependencies
+
+### 12. Unused default Next.js assets
+- **Severity:** Low
+- **Status:** Fixed
+- Removed unused SVG files from public/: file.svg, globe.svg, next.svg, vercel.svg, window.svg
 
 ## Checklist
 
@@ -75,7 +85,7 @@
 - [x] `npm run lint` error-free
 - [x] Responsive design (Tailwind breakpoints: sm/md/lg used correctly)
 - [x] Favicon (generated via Next.js icon.tsx)
-- [x] OGP metadata (title, description, twitter card configured in layout.tsx)
+- [x] OGP metadata (title, description, twitter card, dynamic OG images)
 - [x] 404 page (not-found.tsx)
 - [x] Loading state (loading.tsx)
 - [x] Error state (error.tsx)
@@ -83,14 +93,16 @@
 - [x] Input validation (client + server side)
 - [x] Rate limiting (3 requests/day per IP)
 - [x] API error handling (malformed JSON, missing params, invalid scene/tone)
+- [x] Design system compliance (black bg, white text, no emojis, no icon libraries)
+- [x] Accessibility (semantic HTML, aria labels, form labels, focus states)
+- [x] No unused dependencies or assets
 
 ## Not Addressed (Out of Scope / Pre-existing)
 
-- **OGP image generation** - No og:image set. Listed as TODO in README.
 - **Vercel deployment** - Listed as TODO in README.
 - **Environment variables** - ANTHROPIC_API_KEY, GA_ID, GITHUB_TOKEN need to be set on deployment.
-- **lucide-react dependency** - Used only by shadcn/ui Select component internally. Acceptable.
+- **Google Site Verification** - Uses environment variable; must be set in Vercel.
 
 ## Summary
 
-Found and fixed 10 issues. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.
+Found and fixed 12 issues total across 2 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.
