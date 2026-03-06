@@ -1,0 +1,34 @@
+{
+  "name": "eigo-ai",
+  "description": "日本語から英語ビジネスメールをAI自動生成するサービス。10種類のビジネスシーンに対応し、トーン・関係性に応じた最適な英語表現を選択。",
+  "url": "https://eigo.ezoai.jp",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "provider": {
+    "organization": "Ghostfee",
+    "url": "https://github.com/Michey0495"
+  },
+  "documentationUrl": "https://eigo.ezoai.jp/llms.txt",
+  "authentication": {
+    "schemes": ["none"]
+  },
+  "defaultInputModes": ["text"],
+  "defaultOutputModes": ["text"],
+  "skills": [
+    {
+      "id": "generate_english_email",
+      "name": "英語ビジネスメール生成",
+      "description": "日本語の要点から英語ビジネスメールを自動生成。シーン・トーン・関係性に応じた最適な表現を選択し、日本語の表現解説付き。",
+      "uri": "https://eigo.ezoai.jp/api/generate"
+    },
+    {
+      "id": "mcp_server",
+      "name": "MCP Server",
+      "description": "AIエージェント向けMCPサーバーエンドポイント。generate_english_email, list_scenes ツールを提供。",
+      "uri": "https://eigo.ezoai.jp/api/mcp"
+    }
+  ]
+}

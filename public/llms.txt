@@ -1,0 +1,48 @@
+# eigo-ai - AI英語ビジネスメール生成サービス
+# https://eigo.ezoai.jp
+
+## 概要
+eigo-aiは、日本語で要点を入力するだけでAIが英語ビジネスメールを自動生成するWebアプリケーションです。
+10種類のビジネスシーンに対応し、トーン・関係性に応じた最適な英語表現を選択します。
+生成メールには日本語での表現解説が付き、使うたびに英語力が向上します。
+
+## 主要ページ
+- / - トップページ（サービス説明、シーン一覧）
+- /generate - メール生成ページ（メインUI）
+- /scenes/[scene] - シーン別詳細ページ
+- /guide/[topic] - 英語メール基礎知識
+
+## API
+- POST /api/generate - 英語メール生成API
+  - パラメータ: scene, tone, relationship, recipientName, senderName, points
+  - レスポンス: subject, body, explanation
+- POST /api/mcp - MCPサーバーエンドポイント（AIエージェント向け）
+
+## 対応シーン
+1. self-introduction - 自己紹介メール
+2. request - 依頼メール
+3. apology - お詫びメール
+4. reminder - 催促メール
+5. thank-you - お礼メール
+6. decline - 断りメール
+7. report - 報告メール
+8. inquiry - 問い合わせメール
+9. appointment - アポイントメール
+10. farewell - 退職挨拶メール
+
+## トーン設定
+- formal - フォーマル（取引先・上位者向け）
+- standard - スタンダード（同僚・一般ビジネス）
+- casual - カジュアル（親しい同僚・友人）
+
+## 技術スタック
+- Next.js 15 (App Router), TypeScript, Tailwind CSS, Claude API (Anthropic)
+
+## Links
+- Website: https://eigo.ezoai.jp
+- GitHub: https://github.com/Michey0495/ai-43743d1d
+- Agent Card: https://eigo.ezoai.jp/.well-known/agent.json
+
+## Contact
+- Developer: Ghostfee
+- GitHub: https://github.com/Michey0495
