@@ -62,8 +62,12 @@ export function GenerateForm() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "生成に失敗しました");
+        let errorMessage = "生成に失敗しました";
+        try {
+          const data = await res.json();
+          errorMessage = data.error || errorMessage;
+        } catch {}
+        throw new Error(errorMessage);
       }
 
       const data = await res.json();

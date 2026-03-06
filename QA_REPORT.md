@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-07
 **Tester:** Claude (automated QA)
-**QA Pass:** 2nd pass (follow-up)
+**QA Pass:** 5th pass (comprehensive review)
 
 ## Build & Lint
 
@@ -11,6 +11,7 @@
 | `npm run build` | PASS |
 | `npm run lint` | PASS (0 errors) |
 | TypeScript | PASS (strict mode) |
+| Bundle size | 872K chunks (acceptable) |
 
 ## Issues Found & Fixed (1st Pass)
 
@@ -70,46 +71,28 @@
 ### 11. Design system violation: lucide-react usage
 - **Severity:** Medium
 - **Status:** Fixed
-- `src/components/ui/select.tsx` imported `CheckIcon`, `ChevronDownIcon`, `ChevronUpIcon` from lucide-react
+- `src/components/ui/select.tsx` imported icons from lucide-react
 - CLAUDE.md prohibits icon libraries: Replaced with inline SVG components
 - Removed `lucide-react` from package.json dependencies
 
 ### 12. Unused default Next.js assets
 - **Severity:** Low
 - **Status:** Fixed
-- Removed unused SVG files from public/: file.svg, globe.svg, next.svg, vercel.svg, window.svg
-
-## Checklist
-
-- [x] `npm run build` success
-- [x] `npm run lint` error-free
-- [x] Responsive design (Tailwind breakpoints: sm/md/lg used correctly)
-- [x] Favicon (generated via Next.js icon.tsx)
-- [x] OGP metadata (title, description, twitter card, dynamic OG images)
-- [x] 404 page (not-found.tsx)
-- [x] Loading state (loading.tsx)
-- [x] Error state (error.tsx)
-- [x] SEO: sitemap.xml, robots.txt, llms.txt, agent.json, JSON-LD
-- [x] Input validation (client + server side)
-- [x] Rate limiting (3 requests/day per IP)
-- [x] API error handling (malformed JSON, missing params, invalid scene/tone)
-- [x] Design system compliance (black bg, white text, no emojis, no icon libraries)
-- [x] Accessibility (semantic HTML, aria labels, form labels, focus states)
-- [x] No unused dependencies or assets
+- Removed unused SVG files from public/
 
 ## Issues Found & Fixed (3rd Pass)
 
 ### 13. OG画像URLの不一致
 - **Severity:** High (SEO)
 - **Status:** Fixed
-- `layout.tsx` のメタデータで `/og-image.png` を手動指定していたが、該当ファイルが `public/` に存在しない
-- 実際のOG画像は `opengraph-image.tsx` で動的生成。Next.jsのファイルベースメタデータに統一
+- `layout.tsx` のメタデータで `/og-image.png` を手動指定していたが、該当ファイルが存在しない
+- Next.jsのファイルベースメタデータに統一
 
 ### 14. 構造化データの虚偽レーティング
 - **Severity:** High (SEO penalty risk)
 - **Status:** Fixed
 - JSON-LD に `AggregateRating`（4.8点/127件）が含まれていたが、実際のレビューに基づかない
-- Google構造化データガイドライン違反。`aggregateRating` セクションを削除
+- `aggregateRating` セクションを削除
 
 ### 15. サーバーサイドバリデーション不足
 - **Severity:** Medium
@@ -121,38 +104,70 @@
 ### 16. フィードバックウィジェットのアクセシビリティ
 - **Severity:** Low
 - **Status:** Fixed
-- 閉じるボタン（&times;）に `aria-label` がなく、スクリーンリーダーで用途不明
-- `aria-label="閉じる"` を追加
+- 閉じるボタンに `aria-label="閉じる"` を追加
 
 ## Issues Found & Fixed (4th Pass)
 
 ### 17. JSON.parseのエラーハンドリング不足
 - **Severity:** Medium
 - **Status:** Fixed
-- `src/app/api/generate/route.ts` でAI応答のJSON解析時に `JSON.parse` がtry/catchなしで呼ばれていた
-- AI応答が不正なJSONの場合、未ハンドルの例外でサーバーエラーになる
-- try/catchを追加し、ユーザー向けエラーメッセージを返すように修正
+- AI応答のJSON解析時にtry/catchを追加
 
 ### 18. コピーボタンのエラーハンドリング不足
 - **Severity:** Low
 - **Status:** Fixed
-- `src/components/copy-button.tsx` で `navigator.clipboard.writeText` がtry/catchなし
-- HTTPS以外のコンテキストやパーミッション拒否時にエラー
-- try/catchを追加
+- `navigator.clipboard.writeText` にfallback付きtry/catchを追加
 
 ### 19. フォームinput要素のアクセシビリティ不備
 - **Severity:** Low
 - **Status:** Fixed
-- `src/components/generate-form.tsx` の名前入力フィールドに `id`/`htmlFor` 属性がなく、ラベルとinputが関連付けされていなかった
-- `id="recipientName"`, `id="senderName"` と対応する `htmlFor` を追加
+- 名前入力フィールドに `id`/`htmlFor` 属性を追加
+
+## Issues Found & Fixed (5th Pass)
+
+### 20. フィードバックtextareaの入力長制限なし
+- **Severity:** Medium
+- **Status:** Fixed
+- クライアント側: `maxLength={1000}` を追加
+- サーバー側: 1000文字制限のバリデーションと型チェックを追加
+
+### 21. フィードバックtextareaのアクセシビリティ
+- **Severity:** Low
+- **Status:** Fixed
+- `aria-label="フィードバック内容"` を追加
+
+### 22. 生成フォームのエラーレスポンス解析
+- **Severity:** Medium
+- **Status:** Fixed
+- `generate-form.tsx` でAPIエラー時の `res.json()` がtry/catchなし
+- レスポンスがJSON以外の場合に未ハンドル例外になる
+- try/catchで囲み、フォールバックエラーメッセージを使用するよう修正
+
+## Checklist
+
+- [x] `npm run build` success
+- [x] `npm run lint` error-free
+- [x] レスポンシブ対応（Tailwind breakpoints: sm/md/lg使用）
+- [x] favicon (icon.tsx で動的生成)
+- [x] OGP metadata (title, description, twitter card, 動的OG画像)
+- [x] 404 page (not-found.tsx)
+- [x] Loading state (loading.tsx)
+- [x] Error state (error.tsx)
+- [x] SEO: sitemap.xml, robots.txt, llms.txt, agent.json, JSON-LD
+- [x] Input validation (client + server side, 全APIルート)
+- [x] Rate limiting (3 requests/day per IP)
+- [x] API error handling (malformed JSON, missing params, invalid values)
+- [x] Design system compliance (black bg, white text, no emojis, no icon libraries)
+- [x] Accessibility (semantic HTML, aria labels, form labels, focus states, skip nav)
+- [x] No unused dependencies or assets
 
 ## Not Addressed (Out of Scope / Pre-existing)
 
-- **Vercel deployment** - Listed as TODO in README.
-- **Environment variables** - ANTHROPIC_API_KEY, GA_ID, GITHUB_TOKEN need to be set on deployment.
-- **Google Site Verification** - Uses environment variable; must be set in Vercel.
+- **Vercel deployment** - Listed as TODO in README
+- **Environment variables** - ANTHROPIC_API_KEY, GA_ID, GITHUB_TOKEN need to be set on deployment
+- **Google Site Verification** - Uses environment variable; must be set in Vercel
 - **Rate limiting in-memory** - Vercelサーバーレス環境では再起動時にリセットされる（無料枠のため影響小）
 
 ## Summary
 
-Found and fixed 19 issues total across 4 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.
+Found and fixed 22 issues total across 5 QA passes. All critical and medium issues resolved. Build and lint pass cleanly. The application is ready for deployment.

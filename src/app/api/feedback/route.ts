@@ -9,8 +9,12 @@ export async function POST(request: NextRequest) {
   }
   const { type, message, repo } = payload;
 
-  if (!message?.trim()) {
+  if (!message?.trim() || typeof message !== "string") {
     return NextResponse.json({ error: "Message required" }, { status: 400 });
+  }
+
+  if (message.length > 1000) {
+    return NextResponse.json({ error: "Message too long" }, { status: 400 });
   }
 
   const labels: Record<string, string> = {
