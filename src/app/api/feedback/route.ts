@@ -7,7 +7,8 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { type, message, repo } = payload;
+  const { type, message } = payload;
+  const repo = "ai-43743d1d";
 
   if (!message?.trim() || typeof message !== "string") {
     return NextResponse.json({ error: "Message required" }, { status: 400 });

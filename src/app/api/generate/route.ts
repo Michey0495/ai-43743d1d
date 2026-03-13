@@ -78,7 +78,10 @@ export async function POST(request: NextRequest) {
   });
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
     const response = await fetch("https://api.anthropic.com/v1/messages", {
+      signal: controller.signal,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,6 +94,8 @@ export async function POST(request: NextRequest) {
         messages: [{ role: "user", content: prompt }],
       }),
     });
+
+    clearTimeout(timeout);
 
     if (!response.ok) {
       const errData = await response.json();
@@ -122,11 +127,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (typeof result.subject !== "string" || typeof result.body !== "string") {
+      return NextResponse.json(
+        { error: "生成結果の形式が不正です" },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
       {
         subject: result.subject,
         body: result.body,
-        explanation: result.explanation,
+        explanation: typeof result.explanation === "string" ? result.explanation : "",
         remaining,
       },
       {
